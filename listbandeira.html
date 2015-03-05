@@ -1,0 +1,159 @@
+  <div ng-controller="bandeiraController" layout="column" layout-fill>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+          <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">Sidenav Left</h1>
+          </md-toolbar>
+          <md-content class="md-padding" ng-controller="LeftCtrl">
+            <md-button ng-click="close()" class="md-primary" hide-gt-md>
+              Close Sidenav Left
+            </md-button>
+            <p hide-md show-gt-md>
+              This sidenav is locked open on your device. To go back to the default behavior,
+              narrow your display.
+            </p>
+          </md-content>
+        </md-sidenav>
+        <md-content flex class="md-padding">
+          <div layout="column" layout-fill layout-align="center center">
+            <p>
+            The left sidenav will 'lock open' on a medium (>=960px wide) device.
+            </p>
+            <div>
+              <md-button ng-click="toggleLeft()"
+                class="md-primary" hide-gt-md>
+                Toggle left
+              </md-button>
+            </div>
+            <div>
+              <md-button ng-click="toggleRight()"
+                class="md-primary">
+                Toggle right
+              </md-button>
+            </div>
+          </div>
+        </md-content>
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+          <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">Sidenav Right</h1>
+          </md-toolbar>
+          <md-content ng-controller="RightCtrl" class="md-padding">
+            <md-button ng-click="close()" class="md-primary">
+              Close Sidenav Right
+            </md-button>
+          </md-content>
+        </md-sidenav>
+    </section>
+</div>
+
+
+    <div class="data-table-container">
+                <table class="data-table data-table--has-primary data-table--has-secondary">
+                    <thead>
+                        <tr>
+                            <th style="width: 73px; padding:0"></th>
+                            <th><strong>Código</strong></th>
+                            <th><strong>Descrição</strong></th>                
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="4" class="divider divider--dark"></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="data-table__clickable-row">
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <span>3</span>
+                            </td>
+                            <td>
+                                <span>Hiper Card</span>
+                            </td>                
+                            <td>
+                                <lx-dropdown position="right" from-top>
+                                    <button class="btn btn--l btn--black btn--icon" lx-ripple lx-dropdown-toggle>
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </button>
+
+                                    <lx-dropdown-menu>
+                                        <ul>
+                                            <li><a class="dropdown-link">Action</a></li>
+                                            <li><a class="dropdown-link">Another action</a></li>
+                                            <li><a class="dropdown-link">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a class="dropdown-link dropdown-link--is-header">Header</a></li>
+                                            <li><a class="dropdown-link">Separated link</a></li>
+                                        </ul>
+                                    </lx-dropdown-menu>
+                                </lx-dropdown>
+                            </td>
+                        </tr>
+
+                        <tr class="data-table__clickable-row">
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <span>2</span>
+                            </td>
+                            <td>
+                                <span>Master Card</span>
+                            </td>    
+
+                            <td>
+                                <lx-dropdown position="right" from-top>
+                                    <button class="btn btn--l btn--black btn--icon" lx-ripple lx-dropdown-toggle>
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </button>
+
+                                    <lx-dropdown-menu>
+                                        <ul>
+                                            <li><a class="dropdown-link">Action</a></li>
+                                            <li><a class="dropdown-link">Another action</a></li>
+                                            <li><a class="dropdown-link">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a class="dropdown-link dropdown-link--is-header">Header</a></li>
+                                            <li><a class="dropdown-link">Separated link</a></li>
+                                        </ul>
+                                    </lx-dropdown-menu>
+                                </lx-dropdown>
+                            </td>
+                        </tr>
+
+                        <tr class="data-table__clickable-row">
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <span>1</span>
+                            </td>
+                            <td>
+                                <span>Visa</span>
+                            </td>    
+                                        
+                            <td>
+                                <lx-dropdown position="right" from-top>
+                                    <button class="btn btn--l btn--black btn--icon" lx-ripple lx-dropdown-toggle>
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </button>
+
+                                    <lx-dropdown-menu>
+                                        <ul>
+                                            <li><a class="dropdown-link">Action</a></li>
+                                            <li><a class="dropdown-link">Another action</a></li>
+                                            <li><a class="dropdown-link">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a class="dropdown-link dropdown-link--is-header">Header</a></li>
+                                            <li><a class="dropdown-link">Separated link</a></li>
+                                        </ul>
+                                    </lx-dropdown-menu>
+                                </lx-dropdown>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>

@@ -1,0 +1,5 @@
+{
+  "directory": "app/bower_components",  
+  "https-proxy":"http://pedro.machado:Ped.2012@proxy.ciss.com.br:3128",
+  "proxy":"http://pedro.machado:Ped.2012@proxy.ciss.com.br:3128"  
+}

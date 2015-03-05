@@ -1,0 +1,1 @@
+cmd /k "C:\Users\pedro.machado\Documents\NetBeansProjects\ERPCloud\web\components"

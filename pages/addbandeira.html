@@ -1,0 +1,404 @@
+
+<script> 
+	$(document).ready(function(){
+
+		 $('body').click(function(e){
+			var divPrincipal = $('#wfPrincipal');
+			var divTaxa = $('#wfTaxa');
+			var divAutorizadora = $('#wfAutorizadora');
+
+		 	if(divPrincipal.has(e.target).length || e.target == divPrincipal[0])
+		 		return;	 	
+
+		 	if(divTaxa.has(e.target).length || e.target == divTaxa[0])
+		 		return;	 	
+
+		 	if(divAutorizadora.has(e.target).length || e.target == divAutorizadora[0])
+		 		return;	
+
+		 	$('#wfAutorizadora').removeClass('wfconteudo');
+	    	$('#wfAutorizadora').detach().prependTo('#div85');
+	    	$('#wfAutorizadora').removeClass('wfReajusteCabecalho');
+
+	    	$('#wfTaxa').removeClass('wfconteudo');
+	    	$('#wfTaxa').detach().prependTo('#div85');
+	    	$('#wfTaxa').removeClass('wfReajusteCabecalho');
+
+	    	$('#wfPrincipal').removeClass('wfconteudo');
+	    	$('#wfPrincipal').removeClass('wfReajusteCabecalho');
+	    	$('#wfPrincipal').detach().prependTo('#div85');
+
+
+
+	        if(!$('#inputBandeira').val() == ''){
+	        	$('#spBandeira').text($('#inputBandeira').val());
+	        }else{
+	        	$('#spBandeira').text("Nenhuma bandeira informada");
+	        }
+	    	$('#principalList').show();
+	    	$('#principalForm').hide();
+
+	    	$('#taxaForm').hide();
+	    	$('#taxaList').show();
+
+	    	$('#borderPrincipal').hide();
+	    	$('#borderTaxas').hide();
+	    	$('#borderAutorizadora').hide();
+	    
+	    });
+
+	    $("#wfPrincipal").click(function(){
+
+	    	if($('#wfPrincipal').hasClass('wfconteudo')){
+	    		return;
+	    	}
+	    	$('#wfPrincipal').addClass('wfconteudo');
+	    	$('#wfPrincipal').detach().prependTo('#div90');
+	    	$('#wfCabecalho').detach().prependTo('#div90');
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalho');
+	    	$('#wfPrincipal').removeClass('wfReajusteCabecalho');
+
+	    	if($('#wfTaxa').hasClass('wfconteudo')){
+	    		$('#wfTaxa').addClass('wfReajusteCabecalho');
+	    	}
+
+	    	$('#wfTaxa').removeClass('wfconteudo');
+
+	    	if($('#wfAutorizadora').hasClass('wfconteudo')){
+	    		$('#wfAutorizadora').addClass('wfReajusteCabecalho');
+	    	}
+
+	    	$('#wfAutorizadora').removeClass('wfconteudo');
+	    	$('#wfAutorizadora').removeClass('wfconteudo');
+
+	    	$('#principalList').hide();
+	    	$('#principalForm').show();
+	    	$('#borderPrincipal').show();
+	    	$('#borderTaxas').hide();
+	    	$('#borderAutorizadora').hide();
+
+	    	$('#taxaForm').hide();
+	    	$('#taxaList').show();
+
+	    	$('#inputBandeira').focus();
+	    	
+	    });	   
+
+
+	    $("#wfTaxa").click(function(){
+	    	if($('#wfTaxa').hasClass('wfconteudo')){
+	    		return;
+	    	}
+
+	    	$('#wfTaxa').removeClass('wfReajusteCabecalho');
+
+
+	    	if($('#wfAutorizadora').hasClass('wfconteudo')){
+	    		$('#wfAutorizadora').addClass('wfReajusteCabecalho');
+	    	}
+
+	    	$('#wfAutorizadora').removeClass('wfconteudo');
+	    	$('#wfPrincipal').removeClass('wfconteudo');
+
+	    	$('#wfTaxa').addClass('wfconteudo'); //fica grande
+	    	$('#wfTaxa').detach().prependTo('#div90'); //vai pro começo da div 90
+	    	$('#wfPrincipal').detach().prependTo('#div90'); // principal vai pro começo da div 90
+	    	$('#wfCabecalho').detach().prependTo('#div90'); // cabeçalho vai pro começo da div 90	    	
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalho'); // ajusta cabeçalho
+	    	$('#wfPrincipal').addClass('wfReajusteCabecalho'); // ajusta div principal
+	        //$("#panel").slideToggle("slow");
+	        
+	        if(!$('#inputBandeira').val() == ''){
+	        	$('#spBandeira').text($('#inputBandeira').val());
+	        }else{
+	        	$('#spBandeira').text("Nenhuma bandeira informada");
+	        }
+	        $('#principalList').show();
+	    	$('#principalForm').hide();
+
+	    	$('#taxaForm').show();
+	    	$('#borderTaxas').show();
+	    	$('#borderPrincipal').hide();
+	    	$('#borderAutorizadora').hide();
+	    	$('#taxaList').hide();
+
+	    	$('#inputDiaVencimento').focus();
+
+	    });	  
+
+	    $("#wfAutorizadora").click(function(){
+	    	$('#wfAutorizadora').removeClass('wfReajusteCabecalho');
+	    	$('#wfPrincipal').removeClass('wfconteudo');
+	    	$('#wfTaxa').removeClass('wfconteudo');
+	    	$('#wfAutorizadora').addClass('wfconteudo'); //fica grande
+
+	    	$('#wfAutorizadora').detach().prependTo('#div90'); //vai pro começo da div 90
+	    	$('#wfTaxa').detach().prependTo('#div90'); // cabeçalho vai pro começo da div 90	
+	    	$('#wfPrincipal').detach().prependTo('#div90'); // principal vai pro começo da div 90
+	    	$('#wfCabecalho').detach().prependTo('#div90'); // cabeçalho vai pro começo da div 90		    	
+	    	
+
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalho'); // ajusta cabeçalho
+	    	$('#wfPrincipal').addClass('wfReajusteCabecalho'); // ajusta div principal
+	    	$('#wfTaxa').addClass('wfReajusteCabecalho');
+
+
+
+	        
+	        if(!$('#inputBandeira').val() == ''){
+	        	$('#spBandeira').text($('#inputBandeira').val());
+	        }else{
+	        	$('#spBandeira').text("Nenhuma bandeira informada");
+	        }
+       	    $('#principalList').show();
+	    	$('#principalForm').hide();
+
+	    	$('#taxaForm').hide();
+	    	$('#taxaList').show();
+
+	    	$('#borderAutorizadora').show();
+	    	$('#borderPrincipal').hide();
+	    	$('#borderTaxas').hide();
+
+	    }); 
+
+		 $("#iconPlus").click(function(){		 	
+		 	
+
+		 	//var $copy = $('.parcelasVisible').clone();
+
+		 	//$('.parcelaCopy').html($copy);
+		 	//.insertAfter('#divVencimento');	
+		 	//$('form.material').materialForm();	 	
+		 	var scntDiv = $('#frmTaxas');
+		 	$('<div class="group" style="float:left; width: 50%"><input type="text" required><span class="highlight"></span><span class="bar"></span><label>Acima de X Parcelas</label></div><div class="group" style="float:left; width: 30%; margin-left:50px;"><input type="text" required><span class="highlight"></span><span class="bar"></span><label>% de Taxa</label><a href="#" class="remove_field">Remove</a></div>').appendTo(scntDiv);
+		 	/*$('<div flex-container="row" style="width:50%;" flex-gutter="24"><div flex-item><lx-text-field label="Acima de X Parcelas"><input type="text" ng-model="textFields.lastName"></lx-text-field></div><div flex-item><lx-text-field label="% de Taxa"><input type="text" ng-model="textFields.lastName"></lx-text-field></div></div>').appendTo(scntDiv);*/
+
+
+		 	/*$("<div flex-item><lx-text-field label='Acima de X Parcelas'><input type='text' id='acimaXParcela' ng-model='textFields.lastName'></lx-text-field></div><div flex-item>	<lx-text-field label='% de Taxa'><input type='text' id='perTaxa' ng-model='textFields.lastName'></lx-text-field></div>").insertAfter('#parcelasVisible');*/
+
+		 	//$('#acimaXParcela').focus();
+		 });
+
+ 			$(".parcelaCopy").on("click",".remove_field", function(e){ //user click on remove text
+        		alert($(this).parent('div'));
+        		e.preventDefault(); $(this).parent('div').remove();
+    		});
+
+		    $("#divPerTaxa").click(function(){
+		 	$('#inputPerTaxaPlus').prop('disabled',false);
+		 	$('#inputPerTaxaPlus').focus();
+		 });
+
+	});
+</script>
+
+<div style="width: 90%; margin:-70px auto;" id="div90">
+	<div style="width: 85%; margin:0px auto;" id="div85">
+		<md-whiteframe class="md-whiteframe-z2" id="wfCabecalho" style="background-color:white; height: 54px; text-align:left;" layout layout-align="">
+			<div style="padding:15px 0 0 15px; color: grey; font-size: 14pt;">
+				Nova Bandeira de Cartão			
+			</div>		
+			<hr>	
+		</md-whiteframe>
+
+		<md-whiteframe class="md-whiteframe-z2" id="wfPrincipal" style="background-color:white; min-height: 130px; text-align:left;" layout layout-align="">
+			<div style="padding:20px 0 0 15px; color: black; font-size: 13pt; width:100%">
+				<strong>Principal</strong>
+				<div id="borderPrincipal" style="width:101%; margin-left:-14px; display:none; padding-bottom:7px; border-bottom:1px solid rgb(224, 224, 224);"></div>
+				<div id="principalList" style="padding:20px 0 0 0px; color: grey; font-size: 12pt; width:100%; clear:booth;">
+					<span id="spBandeira">Nenhuma bandeira informada</span>
+				</div>		
+				<div flex-container="row" id="principalForm" style="display:none; width: 80%; padding-bottom:30px;" flex-gutter="24">
+					<div flex-item>
+						<lx-text-field label="Bandeira">
+							<input type="text" id='inputBandeira' ng-model="textFields.lastName">
+						</lx-text-field>
+					</div>
+					 <div flex-item>
+        				<lx-file-input label="Selecione..."></lx-file-input>
+    				</div>
+				</div>			
+			</div>			
+			<hr>	
+		</md-whiteframe>
+
+		<md-whiteframe class="md-whiteframe-z2" id="wfTaxa" style="background-color:white; min-height: 130px; text-align:left;" layout layout-align="">
+			<div style="padding:20px 0 0 15px; color: black; font-size: 13pt; width:100%">
+				<strong>Taxas</strong>
+				<div id="borderTaxas" style="width:101%; margin-left:-14px; display:none; padding-bottom:7px; border-bottom:1px solid rgb(224, 224, 224);"></div>
+				<div id="taxaList" style="padding:20px 0 0 0px; color: grey; font-size: 12pt; width:100%; clear:booth;">
+					<span id="spTaxa">Nenhuma taxa de débito ou crédito adicionada</span>
+				</div>
+				<div id="taxaForm" style="display:none; padding-bottom: 30px; padding-left:40px;">
+					<div flex-container="row" style="width:50%; padding-top:20px;" flex-gutter="24">					
+						<div flex-item>							
+							<strong>Débito</strong>
+						</div>
+					</div>
+					<div flex-container="row" style="width:50%; margin-top:-16px;" flex-gutter="24">					
+						<div flex-item>							
+							<lx-text-field label="Dias de Vencimento">
+								<input type="text" id='inputDiaVencimento' ng-model="textFields.lastName">
+							</lx-text-field>
+						</div>
+						<div flex-item>
+	        				<lx-text-field label="% de Taxa">
+								<input type="text" id='inputPerTaxa' ng-model="textFields.lastName">
+							</lx-text-field>
+	    				</div>    								
+					</div>		
+					<br/>
+					<div flex-container="row" style="width:50%; padding-top:20px;" flex-gutter="24">					
+						<div flex-item>							
+							<strong>Crédito</strong>
+						</div>
+					</div>				
+					<div flex-container="row" id="divVencimento" style="width:50%; margin-top: -16px;" flex-gutter="24">							
+						<div flex-item>
+							<lx-text-field label="Dias de Vencimento">
+								<input type="text" id='inputDiaVencimentoCredito' ng-model="textFields.lastName">
+							</lx-text-field>
+						</div>						
+					</div>		
+<style type="text/css">
+	
+* { box-sizing:border-box; }
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #DDDDDD;
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#DDDDDD; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#0092DB;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:1px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#0092DB; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+
+</style>
+					<br/>	
+
+					<div class="parcelaCopy" style="width:50%">						
+						<div class="container">
+							<form id="frmTaxas">
+								
+							</form>
+						</div>						
+					</div>
+
+					<br/>
+					
+					<div flex-container="row" style="width:60%; margin-left:-75px;" flex-gutter="24">				
+						<div flex-item style="cursor:pointer" id="iconPlus">											
+							<lx-text-field label="Acima de X Parcelas" fixed-label="true" icon="plus">
+                				<input disabled="true" id="inputParcela" type="text" ng-model="textFields.fixedFirstName">
+        					</lx-text-field>
+						</div>
+						<div flex-item id="divPerTaxa">
+							<lx-text-field label="% de Taxa" fixed-label="true">
+								<input disabled="true" type="text" id='inputPerTaxaPlus' ng-model="textFields.lastName">
+							</lx-text-field>
+						</div>
+					</div>
+
+				</div>
+			</div>			
+			<hr>	
+		</md-whiteframe>
+		<md-whiteframe class="md-whiteframe-z2" id="wfAutorizadora" style="background-color:white; min-height: 130px; text-align:left;" layout layout-align="">
+			<div style="padding:20px 0 0 15px; color: black; font-size: 13pt; width:100%">
+				<strong>Autorizadoras</strong>
+				<div id="borderAutorizadora" style="width:101%; margin-left:-14px; display:none; padding-bottom:7px; border-bottom:1px solid rgb(224, 224, 224);"></div>
+				<div style="padding:20px 0 0 0px; color: grey; font-size: 12pt; width:100%; clear:booth;">
+					Nenhuma autorizadora relacionada
+				</div>
+			</div>			
+			<hr>	
+		</md-whiteframe>
+	</div>
+
+</div>
+
+

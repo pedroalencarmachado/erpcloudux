@@ -1,0 +1,1499 @@
+
+<style type="text/css">
+	
+* { box-sizing:border-box; }
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+input 				{
+  font-size:18px;
+  padding:4px 10px 4px 0;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #DDDDDD;
+}
+input:focus 		{ outline:none; padding:4px 4px 4px 0; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:rgba(0,0,0,.54); 
+  line-height: 32px!important;
+  white-space: nowrap;
+  font-size:13pt;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:0px;
+  top:0px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#0092DB;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:1px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#0092DB; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;  
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+
+</style>
+
+<script> 
+	$(document).ready(function(){
+		var cont=0;		
+
+		 $('body').keydown(function(e){
+
+		 	if(e.target.id != 'body'){
+			 	if(e.which == 68){
+			 		if(e.altKey){
+			 			$('#h4ProdutoDescBtnList').click();
+			 			$('#produtoDerivado').focus();	 			
+			 		}
+			 	}
+			}	
+
+		 	if(e.which == 68){
+		 		if(e.target.id == 'body'){
+		 			$('#h4ProdutoDescBtnList').click();
+		 		}	 				 	
+		 	}
+		 });
+
+		 $('#h4ProdutoDescBtnList').keydown(function(e){
+		 	if(e.which == 68){
+		 		if(e.altKey){
+		 			return;	 			
+		 		}
+		 	}
+		 	if(e.which == 68){
+		 		$('#h4ProdutoDescBtnList').click();
+		 	}
+		 });
+
+
+
+		 $('body').click(function(e){		 	
+		 	//alert(e.target.id);
+			var divPrincipal = $('#wfPrincipal');
+			var divTaxa = $('#wfTaxa');
+			var divAutorizadora = $('#wfAutorizadora');							
+
+		 	if(divPrincipal.has(e.target).length || e.target == divPrincipal[0])
+		 		return;	 	
+
+		 	if(divTaxa.has(e.target).length || e.target == divTaxa[0])
+		 		return;	 	
+
+		 	if(divAutorizadora.has(e.target).length || e.target == divAutorizadora[0])
+		 		return;	
+
+		 	if(e.target.id.substring(0,3) == 'icn' || e.target.id.substring(0,3) == 'btn' || e.target.id.substring(0,3) == 
+		 		'h4P' )		 		
+		 		return;	
+
+		 	if( !$('#wfAutorizadora').hasClass('wfconteudo') && !$('#wfTaxa').hasClass('wfconteudo') && !$('#wfPrincipal').hasClass('wfconteudo') ){
+		 		return;
+		 	}	 	
+
+		 	$('#wfAutorizadora').removeClass('wfconteudo');
+	    	$('#wfAutorizadora').detach().prependTo('#div85');
+	    	$('#wfAutorizadora').removeClass('wfReajusteCabecalho');	    	
+
+	    	$('#wfTaxa').removeClass('wfconteudo');
+	    	$('#wfTaxa').detach().prependTo('#div85');
+	    	$('#wfTaxa').removeClass('wfReajusteCabecalho');
+
+
+
+	    	$('#wfPrincipal').removeClass('wfconteudo');
+	    	$('#wfPrincipal').removeClass('wfReajusteCabecalho');
+	    	$('#wfPrincipal').detach().prependTo('#div85');
+
+	    	$('#wfCabecalho').removeClass('wfReajusteCabecalhoFixoTop');
+
+
+
+	        if(!$('#inputBandeira').val() == ''){
+	        	$('#spBandeira').text($('#inputBandeira').val());
+	        }else{
+	        	$('#spBandeira').text("Nenhum produto informado");
+	        }
+
+	    	if($('#txtCodigoList').val()!= '' || $('#txtDescList').val() != '' || $('#txtDescComplList').val() != '' || $('#txtDescResumList').val() || $('#txtCodBarList').val() != '' || $('#txtNCMList'). val() != ''){
+	        	 $('#principalList').show();
+	       		 $('#produtoIMG').show();
+	       		 $('#h4ProdutoDesc').show();
+	       		 $('#h4ProdutoDescConteudoNone').hide();
+	       		 $('#principalListNoConteudo').hide();
+	        }else{
+	        	$('#principalListNoConteudo').show();
+	        	$('#h4ProdutoDescConteudoNone').show();
+	        	$('#h4ProdutoDesc').hide();
+	        	$('#produtoIMG').hide();
+	        }
+
+	    	$('#principalForm').hide();
+
+	    	$('#taxaForm').hide();
+
+	    	if($('#txtSubGrupoLista').val() != '' || $('#txtGrupoLista').val() != '' || $('#txtSecaoLista').val() || $('#txtDivisaoLista').val() != '' || $('#txtMarcaLista').val() != '' || $('#txtCategoriaLista').val() != '' || $('#txtCadeiaLista').val() != ''){
+	    		$('#taxaList').show();
+	    	}else{
+	    		$('#taxaListNoConteudo').show();
+	    	}
+
+	    	if($('#switchEmpresa1Ativo').attr('aria-checked') == 'true' || $('#switchEmpresa2Ativo').attr('aria-checked') == 'true' || $('#switchEmpresa3Ativo').attr('aria-checked') == 'true'){
+	    		$('#autorizadoraList').show();
+	    		$('#autorizadoraListNoConteudo').hide();
+	    	}else{
+	    		$('#autorizadoraList').hide();
+	    		$('#autorizadoraListNoConteudo').show();
+	    	}
+	    	  	
+	    	$('#autorizadoraForm').hide();	
+	    	$('#autorizadoraForm1').hide();	
+	    	$('#autorizadoraForm2').hide();	
+
+	    	$('#borderPrincipal').hide();
+	    	$('#borderTaxas').hide();
+	    	$('#borderAutorizadora').hide();
+
+	    	$('#separador').hide();
+	    	$('#separador1').hide();	
+
+	    
+	    });
+
+	 	$("#wfCabecalho").click(function(){
+			//alert();
+	 	});
+
+	    $("#wfPrincipal").click(function(){
+
+	    	if($('#wfPrincipal').hasClass('wfconteudo')){
+	    		return;
+	    	}
+	    	$('#wfPrincipal').addClass('wfconteudo');
+
+	    	$('#wfPrincipal').detach().prependTo('#div90');
+	    	$('#wfCabecalho').detach().prependTo('#div90');
+
+	    	$('#wfCabecalho').removeClass('wfReajusteCabecalhoFixoTop');
+
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalho');
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalhoFixo');
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalhoFixoTop');
+
+	    	$('#wfPrincipal').removeClass('wfReajusteCabecalho');
+
+	    	if($('#wfTaxa').hasClass('wfconteudo')){
+	    		$('#wfTaxa').addClass('wfReajusteCabecalho');
+	    	}
+
+	    	$('#wfTaxa').removeClass('wfconteudo');
+
+	    	if($('#wfAutorizadora').hasClass('wfconteudo')){
+	    		$('#wfAutorizadora').addClass('wfReajusteCabecalho');
+	    	}
+
+	    	$('#wfAutorizadora').removeClass('wfconteudo');
+	    	$('#wfAutorizadora').removeClass('wfconteudo');
+
+	    	$('#principalList').hide();
+	    	$('#produtoIMG').hide();
+	    	$('#principalForm').show();
+	    	$('#borderPrincipal').show();
+	    	$('#borderTaxas').hide();
+	    	$('#borderAutorizadora').hide();
+
+	    	$('#taxaForm').hide();
+	    	$('#principalListNoConteudo').hide();
+
+	    	if($('#txtSubGrupoLista').val() != '' || $('#txtGrupoLista').val() != '' || $('#txtSecaoLista').val() || $('#txtDivisaoLista').val() != '' || $('#txtMarcaLista').val() != '' || $('#txtCategoriaLista').val() != '' || $('#txtCadeiaLista').val() != ''){
+	    		$('#taxaList').show();
+	    	}else{
+	    		$('#taxaListNoConteudo').show();
+	    	}	    	
+
+	    	if($('#switchEmpresa1Ativo').attr('aria-checked') == 'true' || $('#switchEmpresa2Ativo').attr('aria-checked') == 'true' || $('#switchEmpresa3Ativo').attr('aria-checked') == 'true'){
+	    		$('#autorizadoraList').show();
+	    		$('#autorizadoraListNoConteudo').hide();
+	    	}else{
+	    		$('#autorizadoraList').hide();
+	    		$('#autorizadoraListNoConteudo').show();
+	    	}
+
+
+	    	$('#autorizadoraForm').hide();
+	    	$('#autorizadoraForm1').hide();
+	    	$('#autorizadoraForm2').hide();
+
+	    	$('#separador').hide();
+	    	$('#separador1').hide();	
+
+
+	    	//-$('#produtoDescrição').focus()
+
+	    	//$('#sltProdutoPrincipal').click();
+	  
+	    });	   
+
+	
+	    $("#wfTaxa").click(function(){
+	    	if($('#wfTaxa').hasClass('wfconteudo')){
+	    		return;
+	    	}
+
+	    	$('#wfTaxa').removeClass('wfReajusteCabecalho');
+
+
+	    	if($('#wfAutorizadora').hasClass('wfconteudo')){
+	    		$('#wfAutorizadora').addClass('wfReajusteCabecalho');
+	    	}
+
+	    	$('#wfAutorizadora').removeClass('wfconteudo');
+	    	$('#wfPrincipal').removeClass('wfconteudo');
+
+	    	$('#wfTaxa').addClass('wfconteudo'); //fica grande
+
+	    	$('#wfTaxa').detach().prependTo('#div90'); //vai pro começo da div 90
+	    	$('#wfPrincipal').detach().prependTo('#div90'); // principal vai pro começo da div 90
+	    	$('#wfCabecalho').detach().prependTo('#div90'); // cabeçalho vai pro começo da div 90
+
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalho'); // ajusta cabeçalho
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalhoFixo'); 
+	    	$('#wfPrincipal').addClass('wfReajusteCabecalho'); // ajusta div principal
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalhoFixoTop'); 
+
+	    	$('#wfCabecalho').removeClass('wfReajusteCabecalhoFixoTop');
+	        //$("#panel").slideToggle("slow");
+	        
+	        if(!$('#inputBandeira').val() == ''){
+	        	$('#spBandeira').text($('#inputBandeira').val());
+	        }else{
+	        	$('#spBandeira').text("Nenhum produto informado");
+	        }
+
+	        if($('#txtCodigoList').val()!= '' || $('#txtDescList').val() != '' || $('#txtDescComplList').val() != '' || $('#txtDescResumList').val() || $('#txtCodBarList').val() != '' || $('#txtNCMList'). val() != ''){
+	        	 $('#principalList').show();
+	       		 $('#produtoIMG').show();
+	       		 $('#h4ProdutoDesc').show();
+	       		 $('#h4ProdutoDescConteudoNone').hide();
+	       		 $('#principalListNoConteudo').hide();
+	        }else{
+	        	$('#principalListNoConteudo').show();
+	        	$('#h4ProdutoDescConteudoNone').show();
+	        	$('#h4ProdutoDesc').hide();
+	        	$('#produtoIMG').hide();
+	        }
+
+	        $('#taxaListNoConteudo').hide();
+	    	$('#principalForm').hide();
+
+	    	if($('#switchEmpresa1Ativo').attr('aria-checked') == 'true' || $('#switchEmpresa2Ativo').attr('aria-checked') == 'true' || $('#switchEmpresa3Ativo').attr('aria-checked') == 'true'){
+	    		$('#autorizadoraList').show();
+	    		$('#autorizadoraListNoConteudo').hide();
+	    	}else{
+	    		$('#autorizadoraList').hide();
+	    		$('#autorizadoraListNoConteudo').show();
+	    	}
+
+	    	$('#autorizadoraForm').hide();
+	    	$('#autorizadoraForm1').hide();	
+	    	$('#autorizadoraForm2').hide();
+
+	    	$('#taxaForm').show();
+	    	$('#borderTaxas').show();
+	    	$('#borderPrincipal').hide();
+	    	$('#borderAutorizadora').hide();
+	    	$('#taxaList').hide();	   
+
+	    	$('#separador').hide();
+	    	$('#separador1').hide();	
+
+	    	//angular.element($('#selectSubGrupo')[0]).scope().toggle();
+			//angular.element('#selectSubGrupo').focus();
+			//angular.element(angular.element(angular.element('#selectSubGrupo').children()[0]).children()[0]).scope().isOpened = true;
+			//angular.element(angular.element(angular.element('#selectSubGrupo').children()[0]).children()[0]).toggle();
+	    });	  
+
+		
+	    $("#wfAutorizadora").click(function(){
+    		
+    		if($('#wfAutorizadora').hasClass('wfconteudo')){
+	    		return;
+	    	}	    	
+
+	    	$('#wfAutorizadora').removeClass('wfReajusteCabecalho');
+	    	$('#wfPrincipal').removeClass('wfconteudo');
+	    	$('#wfTaxa').removeClass('wfconteudo');
+
+	    	$('#wfAutorizadora').addClass('wfconteudo'); //fica grande   
+			
+	    	$('#wfAutorizadora').detach().prependTo('#div90'); //vai pro começo da div 90	    	
+	    	$('#wfTaxa').detach().prependTo('#div90'); // cabeçalho vai pro começo da div 90	
+	    	$('#wfPrincipal').detach().prependTo('#div90'); // principal vai pro começo da div 90
+	    	$('#wfCabecalho').detach().prependTo('#div90'); // cabeçalho vai pro começo da div 90	
+
+	    	   	
+	    	
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalho'); // ajusta cabeçalho
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalhoFixo');
+	    	$('#wfCabecalho').addClass('wfReajusteCabecalhoFixoTop');
+	    	$('#wfPrincipal').addClass('wfReajusteCabecalho'); // ajusta div principal
+	    	$('#wfTaxa').addClass('wfReajusteCabecalho');
+
+	    	$('#wfCabecalho').removeClass('wfReajusteCabecalhoFixoTop');
+	        
+	        if(!$('#inputBandeira').val() == ''){
+	        	$('#spBandeira').text($('#inputBandeira').val());
+	        }else{
+	        	$('#spBandeira').text("Nenhum produto informado");
+	        }
+
+       	   if($('#txtCodigoList').val()!= '' || $('#txtDescList').val() != '' || $('#txtDescComplList').val() != '' || $('#txtDescResumList').val() || $('#txtCodBarList').val() != '' || $('#txtNCMList'). val() != ''){
+	        	 $('#principalList').show();
+	       		 $('#produtoIMG').show();
+	       		 $('#h4ProdutoDesc').show();
+	       		 $('#h4ProdutoDescConteudoNone').hide();
+	       		 $('#principalListNoConteudo').hide();
+	        }else{
+	        	$('#principalListNoConteudo').show();
+	        	$('#h4ProdutoDescConteudoNone').show();
+	        	$('#produtoIMG').hide();
+	        	$('#h4ProdutoDesc').hide();
+	        }
+
+	    	$('#principalForm').hide();
+
+	    	$('#taxaForm').hide();
+	    	$('#autorizadoraListNoConteudo').hide();
+
+	    	if($('#txtSubGrupoLista').val() != '' || $('#txtGrupoLista').val() != '' || $('#txtSecaoLista').val() || $('#txtDivisaoLista').val() != '' || $('#txtMarcaLista').val() != '' || $('#txtCategoriaLista').val() != '' || $('#txtCadeiaLista').val() != ''){
+	    		$('#taxaList').show();
+	    	}else{
+	    		$('#taxaListNoConteudo').show();
+	    	}
+
+	    	$('#autorizadoraList').hide();
+	    	$('#autorizadoraForm').show();
+	    	$('#autorizadoraForm1').show();
+	    	$('#autorizadoraForm2').show();
+	    	$('#separador').show();
+	    	$('#separador1').show();
+
+	    	$('#borderAutorizadora').show();
+	    	$('#borderPrincipal').hide();
+	    	$('#borderTaxas').hide();	
+
+	    	//$('#txtPreçoEmpresa1').focus();	    
+
+	    }); 
+
+		 $("#iconPlus").click(function(){		 	
+		 	cont ++;
+		 	//alert(cont);
+
+		 	var scntDiv = $('#codBarCopy');
+		 	$("<div layout layout-sm='column' onmouseover='showIconDeleteCodBar(this)' onmouseout='hideIconDeleteCodBar(this)' id='"+cont+"'  class='items' style='width:100%; margin-top:-5px;'><button class='btn btn--m btn--grey btn--icon' style='margin-left:-3%; margin-top:2%; display:none;' lx-ripple style='margin-left:-10%; margin-top:1%;' id='btnRemove" + cont +"' onclick='deleteCodBar(this)'><i class='mdi mdi-delete' id='icnRemove" + cont +"'></i></button><div layout id='itemsID2 ' layout-sm='column' style='width:100%; margin-left:1.5%; margin-top:20px;'><div class='group' id='txtCodBarAdd"+cont+"' style='width:40%; margin-left:3px;'><input type='text' id='txt"+cont+"' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label>Código de Barras</label></div><div class='group' style='width:20%;'><input type='text' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label>Quantidade</label></div><div class='group' style='width:20%;'><input type='text' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label>% de Acréscimo</label></div><div class='group' style='width:20%;'><input type='text' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label>% de Desconto</label></div>	</div>").appendTo(scntDiv);
+
+		 	var scntDiv = $('#codBarCopyDefinicoes');
+		 	$("<div layout layout-sm='column' id='copyAdd"+cont+"' class='items' style='width:100%; margin-top:-5px;'><div layout id='itemsID2 ' layout-sm='column' style='width:100%; margin-top:20px;'><div class='group' id='txtCodBarAdd"+cont+"' style='width:40%; margin-left:3px;'><input class='inputWFFechado' onkeydown='montaDefinicoesCodBarCopia()' type='text' id='txt"+cont+"' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label class='labelWFFechado'>Código de Barras</label></div><div class='group' style='width:20%;'><input type='text' onkeydown='montaDefinicoesCodBarCopia()' class='inputWFFechado' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label class='labelWFFechado'>Quantidade</label></div>		<div class='group' style='width:20%;'> -<input class='inputWFFechado' onkeydown='montaDefinicoesCodBarCopia()' type='text' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label class='labelWFFechado'>% de Acréscimo</label></div><div class='group' style='width:20%;'><input class='inputWFFechado' onkeydown='montaDefinicoesCodBarCopia()' type='text' required style='width:90%'><span class='highlight'></span><span class='bar' style='width:90%;'></span><label class='labelWFFechado'>% de Desconto</label></div>	</div></div>").appendTo(scntDiv);
+
+		 		$('#txt'+cont).focus();
+		 });
+
+		$( "#txtEXTipi" ).keydown(function(e) {
+ 			var keyCode = e.keyCode || e.which; 
+  			if (keyCode == 9) { 
+  				if(e.shiftKey) {
+  				}else{
+  					//next whiteframe
+  					$('#wfTaxa').click();
+  					//alert($('#txtGramatura').prop('tabindex'));
+  				}  				
+  			}  			
+		});
+
+		$( "#txtPreçoEmpresa1" ).keydown(function(e) {
+ 			var keyCode = e.keyCode || e.which; 
+  			if (keyCode == 9) { 
+  				if(e.shiftKey) {
+  					$('#wfTaxa').click();
+  				}else{
+  					//next whiteframe  					
+  					//alert($('#txtGramatura').prop('tabindex'));
+  				}  				
+  			}  			
+		});
+		
+
+		$( "#txtGramatura" ).keydown(function(e) {			
+ 			var keyCode = e.keyCode || e.which; 
+  			if (keyCode == 9) { 
+  				if(e.shiftKey) {
+  					$('#wfPrincipal').click();
+  				}else{
+  					//next whiteframe
+  					
+  					//alert($('#txtGramatura').prop('tabindex'));
+  				}  				
+  			}  			
+		});	
+
+		$( "#txtDataValidade" ).keydown(function(e) {
+ 			var keyCode = e.keyCode || e.which; 
+  			if (keyCode == 9) { 
+  				if(e.shiftKey) {
+  					
+  				}else{
+  					$('#wfAutorizadora').click();
+  				}  				
+  			}  			
+		});			
+		
+	});
+</script>
+
+<script>
+	function preparaListaPrincipal() {  		
+		
+	}
+</script>
+
+<script>
+	function txtDataValidadekeyDown(e) {  		
+		var keyCode = e.keyCode || e.which; 
+  			if (keyCode == 9) { 
+  				if(e.shiftKey) {
+  					
+  				}else{
+  					$('#wfAutorizadora').click();
+  				}  				
+  			}  
+	}
+</script>
+
+<script>
+	function showIconDeleteCodBar(div) {  	
+		//alert($('#div90').attr('id'));
+		//var x=document.getElementById("div90");
+		//var y=document.getElementById(buttom.id); 
+		if(div.id != ''){
+			$('#btnRemove'+div.id).show();
+			$('#txtCodBarAdd'+div.id).css('margin-left','2px');
+		}else{
+			$('#btnCodBar').show();
+			$('#txtCodBarAdd').css('margin-left','0');
+		}
+
+		
+		//$('#'+buttom.id).parent().remove();
+
+
+	   //alert( x.innerHTML=y.parentNode.id);
+	}
+</script>
+
+<script>
+	function hideIconDeleteCodBar(div) {
+		//alert($('#div90').attr('id'));
+		//var x=document.getElementById("div90");
+		//var y=document.getElementById(buttom.id); 
+		if(div.id != ''){
+			$('#btnRemove'+div.id).hide();
+			$('#txtCodBarAdd'+div.id).css('margin-left','3px');
+		}else{
+			$('#btnCodBar').hide();
+			$('#txtCodBarAdd').css('margin-left','14px');
+				//$('#'+buttom.id).parent().remove();
+		}
+	   //alert( x.innerHTML=y.parentNode.id);
+	}
+</script>
+
+<script>
+	function deleteCodBar(buttom) {
+		//alert($('#div90').attr('id'));
+		//var x=document.getElementById("div90");
+		//var y=document.getElementById(buttom.id); 
+		var idDelete = buttom.id.substring(9,buttom.id.length);		
+
+		$('#'+buttom.id).parent().remove();
+
+		$('#copyAdd' + idDelete).remove();
+
+
+	   //alert( x.innerHTML=y.parentNode.id);
+	}
+</script>
+
+<div style="width: 90%; margin:-70px auto;" id="div90">
+	<div style="width: 85%; margin:0px auto;" id="div85">
+		<md-whiteframe class="md-whiteframe-z2" id="wfCabecalho" style="background-color:white; height: 53px; text-align:left; border-bottom: 1px solid rgb(223, 223, 223); position:fixed; width:74.7% !important; box-shadow:none; z-index:99;" layout layout-align="">
+			<div  id="h4ProdutoDescDiv" style="padding:15px 0 0 15px; color: grey; font-size: 14pt; width:90%; margin-top: 5px;">
+				<h4 style="color: grey; font-size: 15pt; margin-top:-1%; display:none;" id="h4ProdutoDesc">
+					{{produto.descricao}} {{produto.descComplementar}}
+				</h4>	
+				<h4 style="color: grey; font-size: 15pt; margin-top:-1%;" id="h4ProdutoDescConteudoNone">
+					Novo Produto
+				</h4>						
+			</div>	
+			<div style="float: right !important; width: 12%; margin-top: 1.5%;" id="h4ProdutoDescBtns">
+				<i class="icon icon--xl icon--grey mdi mdi-dots-vertical" id="h4ProdutoDescIcnOp" style="font-size:25pt; margin-top:-1%; float:right; margin-right:5px; color:rgb(55, 55, 55)"></i>
+				<button class="btn btn--m btn--flat" ng-click="showAdvanced($event)" lx-ripple id="h4ProdutoDescBtnList" style="float:right;">
+					<i class="icon icon--xl icon--grey mdi mdi-view-list" id="h4ProdutoDescIcnList" style="font-size:25pt; margin-top:-1%; color:rgb(55, 55, 55)"></i>
+				</button>				
+			</div>	
+			<hr>	
+		</md-whiteframe>
+
+		<md-whiteframe class="md-whiteframe-z2" id="wfPrincipal" style="background-color:white; min-height: 130px; text-align:left; border-bottom: 1px solid rgb(223, 223, 223);padding-top:55px; padding-bottom:40px;" layout layout-align="">
+			<div style="padding:20px 0 0 15px; color: black; font-size: 13pt; width:100%">								
+								
+				<strong>Informações Gerais</strong>
+				
+				<div id="produtoIMG" style="float:right; width:30%; margin-right:25px; height:35px; margin-top:40px; display:none; ">
+					<img src="../web/components/app/img/img.png" style="height: 280px; margin-top:17px;">
+				</div>			
+				<div id="borderPrincipal" style="width:101%; margin-left:-14px; display:none; padding-bottom:7px; border-bottom:1px solid rgb(224, 224, 224);"></div>
+
+				<div id="principalListNoConteudo" style="color: grey; font-size: 12pt; margin-top:20px; width:100%; clear:booth;">	
+					<span id="spBandeira">Nenhum produto informado</span>
+				</div>
+
+				<div id="principalList" style="color: grey; font-size: 12pt; margin-top:50px; width:100%; clear:booth; display:none;">	
+
+					<div style="float: right; margin-top: -7%; margin-right: 25px; text-align: right;" ng-if="!produto.isprincipal">
+						<span style="font-size:14px; color:rgb(189, 188, 188);" >Derivado de <br/></span> 
+						<span style="font=size:18px; color:rgb(110, 110, 110);" >{{produto.descricao}}</span>
+					</div>
+					<div layout layout-sm="column" style="width:100%;">		
+						<div class="group" style="width:35%">      
+							<input type="text" class="inputWFFechado" id="txtCodigoList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.codigo}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Código</label>
+						</div>	
+						<div class="group" style="width:35%;">      
+							<input type="text" class="inputWFFechado" id="txtDescList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.descricao}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Descrição Geral</label>
+						</div>			
+						<!---<span id="spBandeira">Nenhum produto informado</span>-->
+					</div>
+					<div layout layout-sm="column" style="width:100%;">		
+						<div class="group" style="width:35%">      
+							<input type="text" class="inputWFFechado" id="txtDescComplList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.descComplementar}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Descrição Complementar</label>
+						</div>	
+						<div class="group" style="width:35%;">      
+							<input type="text" class="inputWFFechado" id="txtDescResumList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.descResumida}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Descrição Resumida de Venda</label>
+						</div>									
+					</div>
+					<div layout layout-sm="column" style="width:100%;">		
+						<div class="group" style="width:35%">      
+							<input type="text" class="inputWFFechado" id="txtCodBarList" required style="width:90%; border-bottom:none; color: black" value="{{produto.codBarra}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Código de Barras</label>
+						</div>	
+						<div class="group" style="width:35%;">      
+							<input type="text" class="inputWFFechado" id="txtNCMList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.ncm}}{{produto.extipi}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">NCM / Categoria</label>
+						</div>									
+					</div>
+					<div layout layout-sm="column" style="width:100%;">		
+						<div class="group" style="width:35%">      
+							<input type="text" class="inputWFFechado" id="txtEmbEntadaList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.gramEntrada}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Entrada</label>
+						</div>	
+						<div class="group" style="width:35%;">      
+							<input type="text" class="inputWFFechado" id="txtEmbSaidaList" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.gramSaida}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Saída</label>
+						</div>									
+					</div>
+				</div>		
+				<div flex-container="row" layout-sm="column" id="principalForm" style="display:none; width: 100%; padding-bottom:30px; margin-top:20px;" flex-gutter="24">	
+					<md-content class="md-padding" style="width:100%; overflow: hidden;">					
+						<div layout layout-sm="column" style="width:100%; margin-top: -3%;">
+							<md-input-container id="sltProdutoPrincipal" flex style="margin-top:5px; width:30%; ">
+								<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="1" style="float:left; width:80%; margin-top:30px;" id="chkPrincipal" ng-model="produto.isprincipal" class="md-primary">
+	    							Produto Principal
+	  							</md-checkbox>
+							</md-input-container>							
+							<md-input-container flex style="margin-left:-97px;width:30%">
+								<lx-select ng-model="selects.selectedPersons" change="cbSelectProdutoPrincipal.exec(newValue, oldValue)" id="ckbProduto" placeholder="Produto Principal" choices="people" floating-label>
+									<lx-select-selected>
+										{{ $selected.email }}
+									</lx-select-selected>
+									<lx-select-choices>
+										{{ $choice.email }}
+									</lx-select-choices>
+								</lx-select>
+							</md-input-container>
+							<md-input-container flex style="margin-top:15px; margin-left:35px;width:30%">
+								<md-switch class="md-primary" id="produtoAtivo" ng-model="produto.ativo" md-ink aria-label="Switch No Ink">
+									<div ng-if="produto.ativo">Ativo</div>
+									<div ng-if="!produto.ativo">Inativo</div>
+								</md-switch>
+							</md-input-container>							
+							<md-input-container flex style="margin-top:15px; margin-left:-20px;">
+								<div style="width:95%; height:169px; border:1px solid rgba(0,0,0,.24); text-align: center; padding:2px 2px 2px 2px; color: rgb(166, 166, 166); margin-top:1%; border-radius:5px; font-size: 14px;">					
+									<img src="../web/components/app/img/img.png">
+								</div>
+							</md-input-container>
+						</div>
+						<div style="margin-top: -10%; margin-left:1.5%;">						
+							<strong>Nome do Produto</strong>
+						</div>
+						<div layout layout-sm="column" style="width:100%; margin-left:1.5%; margin-top:20px;">																
+							<div class="group" style="width:17%">      
+								<input type="text" required style="width:90%;" ng-model="produto.codigo">
+								<span class="highlight"></span>
+								<span class="bar" style="width:90%;"></span>
+								<label>Código</label>
+							</div>
+
+							<div class="group" style="width:55%">      
+								<input type="text" id="produtoDescrição" ng-model="produto.descricao" tabindex="1" required style="width:98%">
+								<span class="highlight"></span>
+								<span class="bar" style="width:98%;"></span>
+								<label>Produto Descrição</label>
+							</div>
+
+						</div>	
+						<div layout layout-sm="column" style="width:75%; margin-left:1.5%;">																
+							<div class="group" style="width:50%">      
+								<input type="text" tabindex="2" ng-model="produto.descComplementar"  required style="width:95%;">
+								<span class="highlight"></span>
+								<span class="bar" style="width:93%;"></span>
+								<label>Descrição Complementar</label>
+							</div>
+
+							<div class="group" style="width:50%">      
+								<input type="text" required tabindex="3" ng-model="produto.descResumida"  style="width:90%">
+								<span class="highlight"></span>
+								<span class="bar" style="width:90%;"></span>
+								<label>Descrição Resumida de Venda</label>
+							</div>
+
+						</div>
+						<div style="margin-left:1.5%;">						
+							<strong>Identificadores</strong>
+						</div>
+						<div layout layout-sm="column" style="width:75%; margin-left:1.5%; margin-top:20px;">																
+							<div class="group" style="width:35%">      
+								<input type="text" required tabindex="4" ng-model="produto.codBarra"  style="width:90%;">
+								<span class="highlight"></span>
+								<span class="bar" style="width:90%;"></span>
+								<label>Código de Barras</label>
+							</div>
+
+							<div class="group" style="width:35%">      
+								<input type="text" required tabindex="5" ng-model="produto.ncm" style="width:90%">
+								<span class="highlight"></span>
+								<span class="bar" style="width:90%;"></span>
+								<label>NCM</label>
+							</div>
+
+							<div class="group" style="width:28%">      
+								<input type="text" required tabindex="6" ng-model="produto.extipi" id="txtEXTipi"  style="width:90%">
+								<span class="highlight"></span>
+								<span class="bar" style="width:90%;"></span>
+								<label>EX. TIPI</label>
+							</div>
+						</div>						
+					</md-content>				
+
+				</div>	
+
+			</div>			
+			<hr>	
+		</md-whiteframe>
+
+		<md-whiteframe class="md-whiteframe-z2" id="wfTaxa" style="background-color:white; min-height: 130px; text-align:left; border-bottom: 1px solid rgb(223, 223, 223);" layout layout-align="">
+			<div style="padding:20px 0 0 15px; color: black; font-size: 13pt; width:100%">
+				<strong>Detalhes</strong>
+				<div id="borderTaxas" style="width:101%; margin-left:-14px; display:none; padding-bottom:7px; border-bottom:1px solid rgb(224, 224, 224);"></div>
+
+				<div id="taxaListNoConteudo" ng-if="produto.subgrupo == '' && produto.grupo == '' && produto.secao == '' && produto.divisao == '' && produto.marca == '' && produto.tpItem == '' && produto.cadeia == ''" style="padding:20px 0 0 0px; width:100%; clear:booth;">
+					<span id="spTaxa" style="color:grey; font-size:12pt;">Nenhum detalhe do produto informado</span>
+				</div>
+  
+				<div id="taxaList" style="padding:20px 0 0 0px; width:100%; clear:booth; display:none;">
+										
+					<div style="margin-top:20px;">						
+						<strong>Estrutura Mercadológica</strong>
+					</div>
+
+					<div layout layout-sm="column" style="width:100%; margin-top:23px;">		
+						<div class="group" style="width:25%">      
+							<input type="text" class="inputWFFechado" id="txtSubGrupoLista" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.subgrupo}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Subgrupo</label>
+						</div>	
+						<div class="group" style="width:50%; margin-left:30px;">      
+							<input type="text" class="inputWFFechado" required id="txtGrupoLista" style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.grupo}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Grupo</label>
+						</div>		
+						<div class="group" style="width:30%; margin-left:30px;">      
+							<input type="text" class="inputWFFechado" required id="txtSecaoLista" style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.secao}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Seção</label>
+						</div>		
+						<div class="group" style="width:25%; margin-left:30px;">      
+							<input type="text" class="inputWFFechado" required  id="txtDivisaoLista" style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.divisao}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Divisão</label>
+						</div>
+						<!---<span id="spBandeira">Nenhum produto informado</span>-->
+					</div>
+
+					<div >						
+						<strong>Referências</strong>
+					</div>				
+					<div layout layout-sm="column" style="width:100%; margin-top:23px;">		
+						<div class="group" style="width:25%">      
+							<input type="text" class="inputWFFechado" required  id="txtMarcaLista" style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.marca}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Marca</label>
+						</div>
+						<div class="group" style="width:50%; margin-left:30px;">      
+							<input type="text" class="inputWFFechado" required id="txtCategoriaLista" style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.tpItem}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Categoria</label>
+						</div>
+						<div class="group" style="width:30%; margin-left:30px;">      
+							<input type="text" class="inputWFFechado" required id="txtCadeiaLista" style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="{{produto.cadeia}}">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Cadeia de Preço</label>
+						</div>
+						<div class="group" style="width:25%; margin-left:30px;">      
+							
+						</div>
+					</div>	
+
+					<div style="margin-top:-10px;">						
+						<strong>Definições</strong>
+					</div>	
+					<div layout layout-sm="column" style="width:100%; margin-top:10px; float:left;">		
+						<div class="group" style="width:100%; color: rgb(110, 110, 110) !important; font-size: 18px;">    
+							{{produto.pesavel}} {{produto.auxDiaValidade}} {{produto.cestaBasica}}
+						</div>
+						
+					</div>
+					<div layout layout-sm="column" style="width:100%; margin-top:-50px; float:left;">		
+						<div class="group" style="width:100%; color: rgb(110, 110, 110) !important; font-size: 18px; clear:both; margin-top:20px;">    
+							{{produto.vendaSemEstoque}}
+						</div>
+					</div>
+
+					<div style="margin-top:-10px;">						
+						<strong>Código de Barras da Caixa e Adicionais</strong>
+					</div>				
+					<div layout layout-sm="column" style="width:100%; margin-top:23px;">
+						<div class="group" style="width:40%;"> 
+							<input type="text" class="inputWFFechado" id="txtCodBarAddWFFechado" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Código de Barras</label>
+						</div>
+						<div class="group" style="width:20%;"> 
+							<input type="text" class="inputWFFechado" id="txtQtdAddWFFechado" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Quantidade</label>
+						</div>					
+						<div class="group" style="width:20%;"> 
+							<input type="text" class="inputWFFechado" id="txtPerAcreAddWFFechado" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">% de Acréscimo</label>
+						</div>
+						<div class="group" style="width:20%;"> 
+							<input type="text" class="inputWFFechado" id="txtPerDescAddWFFechado" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">% de Desconto</label>
+						</div>					
+					</div>
+					<div id="codBarCopyDefinicoes"></div>	
+					<!--<span id="spTaxa">Nenhum detalhe do produto informado</span>-->
+				</div>
+
+				<div id="taxaForm" style="display:none; padding-bottom: 30px; padding-left:40px; margin-top: 20px;">
+
+					<div style="margin-left:1.5%;">						
+							<strong>Embalagens</strong>
+					</div>
+
+					<div layout layout-sm="column" style="width:89%; margin-left:1.5%; margin-top:20px;">																
+						<div class="group" style="width:30%; margin-top: -36px;">      
+							<md-input-container flex>
+								<lx-select ng-model="selects.selectEmbalagem" id="ckbProduto" placeholder="Entrada" choices="embalagem" floating-label>
+									<lx-select-selected>
+										{{ $selected.descricao }}
+									</lx-select-selected>
+									<lx-select-choices>
+										{{ $choice.descricao }}
+									</lx-select-choices>
+								</lx-select>
+							</md-input-container>
+						</div>
+
+						<div class="group" style="width:20%; margin-left:35px;">      
+							<input type="text" required tabindex="9" ng-model="produto.gramEntrada" id="txtGramatura" style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>Gramatura</label>
+						</div>
+
+						<div class="group" style="width:30%; margin-left:10%; margin-top: -36px;">      
+							<md-input-container flex>
+								<lx-select ng-model="selects.selectEmbalagem" id="ckbProduto" placeholder="Saída" choices="embalagem" floating-label>
+									<lx-select-selected>
+										{{ $selected.descricao }}
+									</lx-select-selected>
+									<lx-select-choices>
+										{{ $choice.descricao }}
+									</lx-select-choices>
+								</lx-select>
+							</md-input-container>
+						</div>
+						<div class="group" style="width:22%; margin-left:35px;">      
+							<input type="text" required tabindex="11" ng-model="produto.gramSaida" style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label>Gramatura</label>
+						</div>
+					</div>
+
+					<div style="margin-left:1.5%;">						
+							<strong>Estrutura Mercadológica</strong>
+					</div>
+					<div layout layout-sm="column" style="width:100%; margin-left:1.5%;">								
+						<div class="group" style="width:20%">      
+							<lx-select ng-model="selects.selectSubGrupo" id="selectSubGrupo" change="cbSelectSubGrupo.exec(newValue, oldValue)" tabindex="11"  placeholder="Subgrupo" choices="subgrupo" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+						<div class="group" style="width:20%; margin-left:30px;">      
+							<lx-select ng-model="selects.selectGrupo" change="cbSelectGrupo.exec(newValue, oldValue)" placeholder="Grupo" choices="grupo" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }} 
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+						<div class="group" style="width:20%; margin-left:30px;">      
+							<lx-select ng-model="selects.selectedSecao" change="cbSelectSecao.exec(newValue, oldValue)" placeholder="Seção" choices="secao" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+
+						<div class="group" style="width:20%; margin-left:30px;">      
+							<lx-select ng-model="selects.selectedDivisao" change="cbSelectDivisao.exec(newValue, oldValue)" placeholder="Divisão" choices="divisao" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+					</div>
+
+					<div style="margin-left:1.5%;">						
+							<strong>Referências</strong>
+					</div>
+
+					<div layout layout-sm="column" style="width:100%; margin-left:1.5%;"> 
+
+						<div class="group" style="width:20%;">      
+							<lx-select ng-model="selects.selectedMarca" placeholder="Marca" change="cbSelectMarca.exec(newValue, oldValue)" choices="marca" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+						<div class="group" style="width:20%;  margin-left:30px;">      
+							<lx-select ng-model="selects.selectedInformacaoNutricional" placeholder="Informação Nutricional" choices="infNutri" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+						<div class="group" style="width:20%; margin-left:30px;">      
+							<lx-select ng-model="selects.selectedTipoItem" change="cbSelectTipoItem.exec(newValue, oldValue)" placeholder="Tipo Item" choices="tpItem" tfloating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+
+						<div class="group" style="width:20%; margin-left:30px;">      
+							<lx-select ng-model="selects.selectCadeiaPreco" change="cbSelectCadeiraPreco.exec(newValue, oldValue)" placeholder="Cadeia de Preço" choices="cadeia" floating-label>
+								<lx-select-selected>
+									{{ $selected.descricao }}
+								</lx-select-selected>
+								<lx-select-choices>
+									{{ $choice.descricao }}
+								</lx-select-choices>
+							</lx-select>
+						</div>
+					</div>	
+
+					<div style="margin-left:1.5%;">						
+						<strong>Definições</strong>
+					</div>
+					<div layout layout-sm="column" style="width:100%; margin-left:1.5%;"> 
+						<div class="group" style="width:30%;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'Produto pesável'"  ng-false-value="''" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.pesavel" class="md-primary">
+	    							Produto Pesável
+  							</md-checkbox>
+						</div>
+						<div class="group" style="width:20%; margin-top:24px;"> 
+							<input type="text" id="diasValidade" required ng-keydown="montaDefinicoes()" ng-model="produto.diaValidade" style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label>Dias Validade</label>
+						</div>
+					</div>
+					<div layout layout-sm="column" style="width:100%; margin-left:1.5%; margin-top:-20px;">
+						<div class="group" style="width:50%;">  
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" id="cbxCesta" ng-true-value="' e como item de cesta básica'"  ng-false-value="''" style="float:left; width:100%; margin-left:0px;" ng-model="produto.cestaBasica" class="md-primary">
+	    							Cesta Básica
+  							</md-checkbox>
+						</div>
+					</div>
+					<div layout layout-sm="column" style="width:100%; margin-left:1.5%; margin-top:-20px;">
+						<div class="group" style="width:50%;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'Permite vender sem estoque disponível'" ng-false-value="''" style="float:left; width:100%; margin-left:0px;" ng-model="produto.vendaSemEstoque
+							" class="md-primary">
+	    							Permite Vender sem Estoque
+  							</md-checkbox>
+						</div>
+					</div>
+					<div style="margin-left:1.5%;">						
+						<strong>Código de Barras da Caixa e Adicionais</strong>
+					</div>
+					<div layout layout-sm="column" onmouseover="showIconDeleteCodBar(this)" onmouseout="hideIconDeleteCodBar(this)" style="width:100%; margin-top:20px;">
+						<button class='btn btn--m btn--grey btn--icon' style='margin-left:-3%; margin-right:10px; display:none;' lx-ripple style='margin-left:-10%; margin-top:1%;' id='btnCodBar' onclick='deleteCodBar(this)' >
+							<i id="icnCodBar" class='mdi mdi-delete'></i>
+						</button>
+						<div class="group" style="width:40%; margin-left:14px;"> 
+							<input type="text" id="txtCodBarAdd" required ng-keydown="montaDefinicoesCodBarAdd()" style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label>Código de Barras</label>
+						</div>
+						<div class="group" style="width:20%;"> 
+							<input type="text" id="txtQtdAdd" ng-keydown="montaDefinicoesCodBarAdd()" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label>Quantidade</label>
+						</div>						
+						<div class="group" style="width:20%;"> 
+							<input type="text" id="txtPerAcreAdd" ng-keydown="montaDefinicoesCodBarAdd()" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label>% de Acréscimo</label>
+						</div>
+						<div class="group" style="width:20%;"> 
+							<input type="text" id="txtPerDescAdd" ng-keydown="montaDefinicoesCodBarAdd()" required style="width:90%">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label>% de Desconto</label>
+						</div>						
+					</div>
+
+					<div id="codBarCopy"></div>				
+
+					<div flex-container="row" style="width:100%; margin-top:20px; color:rgb(223, 223, 223);">
+						<div class="group"  style="width:23%; cursor:pointer; margin-top:-10px;" id="iconPlus">
+							<i class="mdi mdi-plus"></i> 		
+							Adicionar novo
+						</div>									
+					</div>
+
+				</div>
+			</div>			
+			<hr>	
+		</md-whiteframe>
+		<md-whiteframe class="md-whiteframe-z2" id="wfAutorizadora" style="background-color:white; min-height: 130px; text-align:left; border-bottom: 1px solid rgb(223, 223, 223);" layout layout-align="">
+			<div style="padding:20px 0 0 15px; color: black; font-size: 13pt; width:100%">
+				<strong>Informações por Empresa</strong>
+				<div id="borderAutorizadora" style="width:101%; margin-left:-14px; display:none; padding-bottom:7px; border-bottom:1px solid rgb(224, 224, 224);"></div>
+
+				<div style="padding:20px 0 0 0px; color: grey; font-size: 12pt; width:100%; clear:booth;" id="autorizadoraListNoConteudo">
+					Nenhuma empresa e suas informações de preço, lucro e desconto foram informadas para este produto
+				</div>
+
+				<div style="padding:40px 0 0 0px; color: grey; font-size: 12pt; width:100%; clear:booth; display:none;" id="autorizadoraList">
+					<div style="float: right; font-size: 13px; color:  rgb(189, 188, 188); margin-right:3%;">
+						Inativo para venda
+					</div>
+					<div style="float: right; margin-right: 5%; font-size: 13px; color:  rgb(189, 188, 188);">
+						Inativo para compra
+					</div>		
+					<div layout layout-sm="column" ng-if="produto.empresa1Ativo" style="width:100%; margin-top:20px%;">								
+						<div class="group" style="width:30%">      
+							<input type="text" class="inputWFFechado" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="1 - CISS Dois Vizinhos">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Empresa</label>
+						</div>	
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required  value="{{produto.precoEmpresa1}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">Preço</label>
+						</div>					
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required value="{{produto.lucroEmpresa1}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">% Lucro</label>
+						</div>	
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required value="{{produto.descMaximoEmpresa1}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">% Desc Máx</label>
+						</div>	
+
+						<div class="group" ng-if="produto.inativoCompraEmpresa1" style="width:20%; padding-top:10px;">     							
+							<i class="mdi mdi-check" style="margin-left:50%;"></i>
+						</div>	
+					
+						<div class="group" ng-if="produto.inativoVendaEmpresa1" style="width:20%; padding-top:10px;">      
+							<i class="mdi mdi-check" style="margin-left:50%;"></i>
+						</div>	
+						
+					</div>
+
+					<div layout layout-sm="column" ng-if="produto.empresa2Ativo" style="width:100%; margin-top:-1%;">								
+						<div class="group" style="width:30%">      
+							<input type="text" class="inputWFFechado" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="2 - CISS Curitiba">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Empresa</label>
+						</div>	
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required  value="{{produto.precoEmpresa2}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">Preço</label>
+						</div>					
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required value="{{produto.lucroEmpresa2}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">% Lucro</label>
+						</div>	
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required value="{{produto.descMaximoEmpresa2}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">% Desc Máx</label>
+						</div>	
+
+						<div class="group" ng-if="produto.inativoCompraEmpresa2" style="width:20%; padding-top:10px;">      
+							<i class="mdi mdi-check" style="margin-left:50%;"></i>
+						</div>	
+					
+						<div class="group" ng-if="produto.inativoVendaEmpresa2" style="width:20%; padding-top:10px;">      
+							<i class="mdi mdi-check" style="margin-left:50%;"></i>
+						</div>	
+						
+					</div>
+
+					<div layout layout-sm="column" ng-if="produto.empresa3Ativo" style="width:100%; margin-top:-1%;">								
+						<div class="group" style="width:30%">      
+							<input type="text" class="inputWFFechado" required style="width:90%; border-bottom:none; color: rgb(86 86 86);" value="3 - CISS São Paulo">
+							<span class="highlight"></span>
+							<span class="bar" style="width:90%;"></span>
+							<label class="labelWFFechado">Empresa</label>
+						</div>	
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required  value="{{produto.precoEmpresa3}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">Preço</label>
+						</div>					
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required value="{{produto.lucroEmpresa3}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">% Lucro</label>
+						</div>	
+
+						<div class="group" style="width:15%">      
+							<input type="text" class="inputWFFechado" required value="{{produto.descMaximoEmpresa3}}" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label class="labelWFFechado">% Desc Máx</label>
+						</div>	
+
+						<div class="group" ng-if="produto.inativoCompraEmpresa2" style="width:20%; padding-top:10px;">      
+							<i class="mdi mdi-check" style="margin-left:50%;"></i>
+						</div>	
+					
+						<div class="group" ng-if="produto.inativoVendaEmpresa2" style="width:20%; padding-top:10px;">      
+							<i class="mdi mdi-check" style="margin-left:50%;"></i>
+						</div>	
+						
+					</div>
+
+					<!--Nenhuma empresa e suas informações de preço, lucro e desconto foram informadas para este produto-->
+				</div>
+				<div id="autorizadoraForm" style="display:none; padding-bottom: 30px; padding-left:40px;">
+					<div style="margin-left:1.5%; margin-top: 2%; float:left; width:50%;">						
+						<strong>1 - CISS Dois Vizinhos</strong>
+					</div>
+
+					<div style="margin-left:1.5%; margin-top: 1%; float:right; width:15.5%;">						
+						<md-switch class="md-primary" ng-model="produto.empresa1Ativo" id="switchEmpresa1Ativo" md-no-ink aria-label="Switch No Ink">
+							<div ng-if="produto.empresa1Ativo">Ativo</div>
+							<div ng-if="!produto.empresa1Ativo">Inativo</div>
+						</md-switch>
+					</div>
+
+					<div layout layout-sm="column" style="width:50%; margin-left:1.5%; margin-top:40px; float:left;">											
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.precoEmpresa1" tabindex="21" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>Preço</label>
+						</div>					
+
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.lucroEmpresa1" tabindex="22"  style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>% Lucro</label>
+						</div>	
+
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.descMaximoEmpresa1" tabindex="23"  style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>% Desc Máx</label>
+						</div>		
+
+					</div>
+
+					<div layout layout-sm="column" style="width:45%; margin-left:1.5%; margin-top:18px; float:right; height: 85px;">		
+						<div class="group" style="width:30%; margin-top:12px;"> 
+							Inativo para:
+						</div>
+						<div class="group" style="width:40%; margin-top:-16px;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="24" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.inativoCompraEmpresa1" class="md-primary">
+	    							Compra
+  							</md-checkbox>
+						</div>	
+
+						<div class="group" style="width:30%; margin-top:-16px;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="25" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.inativoVendaEmpresa1" class="md-primary">
+	    							Venda
+  							</md-checkbox>
+						</div>					
+
+					</div>				
+
+				</div>
+				
+				<div id="separador" style="width: 98%; height: 40px; display:none; clear:both; border-top: 1px solid rgb(218,218,218);"></div>				
+
+				<div id="autorizadoraForm1" style="display:none; padding-bottom: 30px; padding-left:40px;">
+					<div style="margin-left:1.5%; margin-top: -1%; float:left; width:50%;">						
+						<strong>2 - CISS Curitiba</strong>
+					</div>
+
+					<div style="margin-left:1.5%; margin-top: -2%; float:right; width:15.5%;">						
+						<md-switch class="md-primary" ng-model="produto.empresa2Ativo" id="switchEmpresa2Ativo" md-no-ink aria-label="Switch No Ink">
+							<div ng-if="produto.empresa2Ativo">Ativo</div>
+							<div ng-if="!produto.empresa2Ativo">Inativo</div>
+						</md-switch>
+					</div>
+
+					<div layout layout-sm="column" style="width:50%; margin-left:1.5%; margin-top:40px; float:left;">											
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.precoEmpresa2" tabindex="26" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>Preço</label>
+						</div>					
+
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.lucroEmpresa2" tabindex="27" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>% Lucro</label>
+						</div>	
+
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.descMaximoEmpresa2" tabindex="28" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>% Desc Máx</label>
+						</div>		
+
+					</div>
+
+					<div layout layout-sm="column" style="width:45%; margin-left:1.5%; margin-top:18px; float:right; height: 85px;">		
+						<div class="group" style="width:30%; margin-top:12px;"> 
+							Inativo para:
+						</div>
+						<div class="group" style="width:40%; margin-top:-16px;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="29" ng-true-value="'true'"  ng-false-value="'false'" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.inativoCompraEmpresa2" class="md-primary">
+	    							Compra
+  							</md-checkbox>
+						</div>	
+
+						<div class="group" style="width:30%; margin-top:-16px;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="30" ng-true-value="'true'"  ng-false-value="'false'" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.inativoVendaEmpresa2" class="md-primary">
+	    							Venda
+  							</md-checkbox>
+						</div>					
+
+					</div>				
+
+				</div>
+
+				<div id="separador1" style="width: 98%; height: 4
+				0px; display:none; clear:both; border-top: 1px solid rgb(218,218,218);"></div>				
+
+				<div id="autorizadoraForm2" style="display:none; padding-bottom: 30px; padding-left:40px;">
+					<div style="margin-left:1.5%; margin-top: 2%; float:left; width:50%;">						
+						<strong>3 - CISS São Paulo</strong>
+					</div>
+
+					<div style="margin-left:1.5%; margin-top: 1%; float:right; width:15.5%;">						
+						<md-switch class="md-primary" ng-model="produto.empresa3Ativo" id="switchEmpresa3Ativo" md-no-ink aria-label="Switch No Ink">
+							<div ng-if="produto.empresa3Ativo">Ativo</div>
+							<div ng-if="!produto.empresa3Ativo">Inativo</div>
+						</md-switch>
+					</div>
+
+					<div layout layout-sm="column" style="width:50%; margin-left:1.5%; margin-top:40px; float:left;">											
+						<div class="group" style="width:30%">      
+							<input type="text" required tabindex="31" ng-model="produto.precoEmpresa3" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>Preço</label>
+						</div>					
+
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.lucroEmpresa3" tabindex="32" style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>% Lucro</label>
+						</div>	
+
+						<div class="group" style="width:30%">      
+							<input type="text" required ng-model="produto.descMaximoEmpresa3" tabindex="33"  style="width:90%;">
+							<span class="highlight"></span>
+							<span class="bar" style="width:95%;"></span>
+							<label>% Desc Máx</label>
+						</div>		
+
+					</div>
+
+					<div layout layout-sm="column" style="width:45%; margin-left:1.5%; margin-top:18px; float:right; height: 85px;">		
+						<div class="group" style="width:30%; margin-top:12px;"> 
+							Inativo para:
+						</div>
+						<div class="group" style="width:40%; margin-top:-16px;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="34" ng-true-value="'true'"  ng-false-value="'false'" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.inativoCompraEmpresa3" class="md-primary">
+	    							Compra
+  							</md-checkbox>
+						</div>	
+
+						<div class="group" style="width:30%; margin-top:-16px;"> 
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" tabindex="35" ng-true-value="'true'"  ng-false-value="'false'" style="float:left; width:100%; margin-top:30px; margin-left:0px;" ng-model="produto.inativoVendaEmpresa3" class="md-primary">
+	    							Venda
+  							</md-checkbox>
+						</div>					
+					</div>				
+				</div>
+			</div>			
+		</md-whiteframe>
+	</div>
+
+</div>
+
+
+<div style="width: 300px; height: 300px; float:right; top:77%; left:92.5%; position:fixed;">	
+	    <div class="fab">
+	    	<a href="#/listprod">
+		        <button class="fab__primary btn btn--xl btn--green btn--fab" ng-click="salvar()"  lx-tooltip="Salvar" tooltip-position="left">
+		        	<i class="mdi mdi-check"></i>	
+		            <i class="mdi mdi-check"></i>	           
+		        </button>
+	        </a>
+	        <div class="fab__actions fab__actions--up">	        
+	            <button class="btn btn--l btn--red btn--fab" lx-ripple lx-tooltip="Cancelar" tooltip-position="left"><i class="mdi mdi-close"></i></button>
+	            <button class="btn btn--l btn--blue btn--fab" lx-ripple lx-tooltip="Salvar e incluir novo" tooltip-position="left"><i class="mdi mdi-plus"></i></button>
+	        </div>
+   		</div>
+</div>
+
+<lx-dialog class="dialog dialog--l" id="test" onclose="closingDialog()">
+    <div class="dialog__header">
+        <div class="toolbar bgc-light-blue-500 pl++">
+            <span class="toolbar__label tc-white fs-title">
+                Lorem Ipsum
+            </span>
+
+            <div class="toolbar__right">
+                <button class="btn btn--l btn--white btn--icon" lx-ripple ng-click="addPerson()">
+                    <i class="mdi mdi-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog__content">
+        <lx-tabs links-tc="light" links-bgc="light-blue-500" indicator="yellow-500" no-divider="true" layout="inline">
+            <lx-tab heading="Lorem Ipsum 1">
+                <div class="p++">
+                    <div ng-repeat="person in people">
+                        {{ person.name }} - {{ person.email }} - {{ person.age }}
+                    </div>
+                </div>
+            </lx-tab>
+
+            <lx-tab heading="Lorem Ipsum 2">
+                <p class="p++">Lorem Ipsum Content 2</p>
+            </lx-tab>
+
+            <lx-tab heading="Lorem Ipsum 3">
+                <p class="p++">Lorem Ipsum Content 3</p>
+            </lx-tab>
+        </lx-tabs>
+    </div>
+
+    <div class="dialog__actions">
+        <button class="btn btn--m btn--black btn--flat" lx-ripple lx-dialog-close>Cancel</button>
+        <button class="btn btn--m btn--black btn--flat" lx-ripple>Lorem Ipsum</button>
+    </div>
+</lx-dialog>

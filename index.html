@@ -1,0 +1,144 @@
+<html ng-app="myModule"> 
+    <head> 
+        <meta charset="UTF-8">
+        <title>TODO supply a title</title>        
+
+        <link rel="stylesheet" href="components/app/bower_components/lumx/dist/lumx.css"/>     
+        <link rel="stylesheet" type="text/css" href="components/css/style.css" />       
+        <link rel="stylesheet" type="text/css" href="components/css/material.datepicker.css" />    
+       
+        <link rel="stylesheet" href="components/app/bower_components/mdi/materialdesignicons.css"/>        
+        
+        <link rel="stylesheet" type="text/css" href="components/app/bower_components/angular-material/angular-material.css">      
+
+        <!-- Libs -->
+        
+        <script type="text/javascript" src="components/app/bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/jquery/dist/moment.min.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/jquery/dist/knockout-3.2.0.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/jquery/dist/material.datepicker.js"></script>
+        
+        <script type="text/javascript" src="components/app/bower_components/velocity/velocity.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/moment/min/moment-with-locales.js"></script>        
+        <script type="text/javascript" src="components/app/bower_components/highlightjs/highlight.pack.js"></script>        
+
+        <!-- Angular -->
+        <script type="text/javascript" src="components/app/bower_components/angular/angular.js"></script>        
+        <script type="text/javascript" src="components/app/bower_components/angular-route/angular-route.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/angular-highlightjs/angular-highlightjs.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/angular-material/angular-material.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="components/app/bower_components/angular-aria/angular-aria.js"></script>
+
+        <!-- LumX -->                
+        <script type="text/javascript" src="components/app/bower_components/lumx/dist/lumx.js"></script>          
+
+        <script type="text/javascript" src="controller/app.js"></script>    
+
+        <!--Controller -->
+        <script type="text/javascript" src="controller/bandeiraListController.js"></script>
+        <script type="text/javascript" src="controller/indexController.js"></script>
+        <script type="text/javascript" src="controller/bandeiraAddController.js"></script>
+        <script type="text/javascript" src="controller/produtoAddController.js"></script>
+        <script type="text/javascript" src="controller/produtoListController.js"></script>
+
+    </head>
+               
+    <body id="body">
+        
+        <div id="mascara"></div>        
+        <div id="cabTopo" style="width:100%; position:fixed; z-index:99;">
+            <div class="p" id="cabecalho" style="background-color: #0088D4; min-height: 50px; width:100%; position:fixed; z-index: 9999999;"> 
+                <div style="float:left" ng-controller="indexController">          
+                    <span style="color: white; position:absolute; padding-left: 78px; padding-top: 8px; ">Supermercado Tropical</span>
+
+                    <button class="btn btn--l btn--black btn--icon" lx-ripple ng-click="toggleLeft()">
+                         <i class="icon icon--l mdi mdi-menu" style="color:white"></i>                   
+                    </button> 
+                                   
+                </div> 
+
+                <div style="float:right; color:white">
+                    <div class="md-toolbar-button-img">
+                        <a id="user-menu" href="javascript:;"><img src="components/app/img/avatar.png" style="width:35px; height: 35px; border-radius:20px;" ></a>
+                    </div> 
+                </div>
+                <div style="float:right; color:white">
+                    <i class="icon icon--l mdi mdi-comment-outline" style="color:white"></i>
+                 </div>
+                 <div style="float:right; color:white">
+                    <i class="icon icon--l mdi mdi-bell" style="color:white"></i>
+                 </div>
+                 <div style="float:right; color:white">
+                    <i class="icon icon--l mdi mdi-view-module" style="color:white"></i>
+                 </div>
+                 <div style="float:right; color:white">
+                     <lx-search-filter closed theme="white"></lx-search-filter>                 
+                 </div>   
+            </div>   
+                
+            <div class="card" id="topo" ng-controller="indexController" style="background-color: #00AAF6; color:white; height: 195px; padding-top: 50px;">
+                <div class="toolbar">
+                    <div style="float:left;">
+                        <span id="spnBreadCrump" style="color: white; position:absolute; padding-left: 71px; padding-top: 15px; font-size:16pt; ">{{topo}}</span>
+                        <br/><br/><br/>                
+                        <div id="topoSearch" flex-item style="color: white; padding-left: 63px;">
+                            <form>                
+                                <lx-text-field label="Buscar" fixed-label="true" icon="magnify" theme="dark">
+                                    <input type="text" style="" ng-model="textFields.fixedFirstNameDark"> 
+                                </lx-text-field>                               
+                            </form>
+                        </div>
+                        <a href="#/addbandeira" id="btnAddHref">                                                          
+                            <button class="btn btn--xl btn--green btn--fab" id="btnADD" target="_blank" style="position:absolute; top: 164px; backgroud-color:#FF5722"><i class="mdi mdi-plus"></i></button>                
+                        </a>             
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <div class="P+" style="padding-top: 212px !important;">            
+            <ng-view></ng-view>
+        </div>
+
+          <div layout="column" ng-controller="indexController" layout-fill>
+            <section layout="row" flex>
+                <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+                  
+                  <md-content class="md-padding" ng-controller="LeftCtrl">
+                    
+                    <p hide-md style="padding-top:20px;">
+                        <li class="list-row list-row--has-primary" style="list-style-type:none">
+                            <div class="list-primary-tile">
+                                <i class="icon icon--l icon--grey icon--flat mdi mdi-home"></i>
+                            </div>
+                            <div class="list-content-tile list-content-tile--one-line">
+                                <strong><a href="index.html" ng-click="close()" style="text-decoration:none; color:black; font-size: 13px;">Início</a></i></strong>
+
+                            </div>
+                        </li>
+                        <li class="list-row list-row--has-primary" style="list-style-type:none">
+                            <div class="list-primary-tile">
+                                <i class="icon icon--l icon--grey icon--flat mdi mdi-home"></i>
+                            </div>
+                            <div class="list-content-tile list-content-tile--one-line" id="lnkBand" ng-mouseover="mouseHoverAddBand()" ng-mouseleave="mouseLeaveAddBand()">
+                                <strong><a href="#/listbandeira"   ng-click="close()" style="text-decoration:none; color:black; font-size: 13px;">Cadastro de Bandeira</a><i class="icon icon--l icon--green icon--flat mdi mdi-plus-circle" style="float:right; margin-top: -8px; display: none" id="addBand"></i></strong>
+
+                            </div>                            
+                        </li>
+                        <li class="list-row list-row--has-primary" style="list-style-type:none">
+                            <div class="list-primary-tile">
+                                <i class="icon icon--l icon--grey icon--flat mdi mdi-barcode"></i>
+                            </div>
+                            <div class="list-content-tile list-content-tile--one-line" id="lnkProd" ng-mouseover="mouseHoverAddProd()" ng-mouseleave="mouseLeaveAddProd()">
+                                <strong><a href="#/listprod"   ng-click="close()" style="text-decoration:none; color:black; font-size: 13px;">Cadastro de Produto</a><i class="icon icon--l icon--green icon--flat mdi mdi-plus-circle" style="float:right; margin-top: -8px; display:none" id="addProd"></i></strong>
+
+                            </div>                            
+                        </li>
+                    </p>
+                  </md-content>
+                </md-sidenav>               
+            </section>
+        </div>
+
+    </body>
+</html>
